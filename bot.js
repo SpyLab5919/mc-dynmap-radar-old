@@ -98,7 +98,7 @@ bot.command('screenshot', async (ctx) => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  await page.setViewportSize({ width: 1400, height: 700 });
+  await page.setViewportSize({ width: 1200, height: 700 });
 
   try {
   await page.goto(url);
