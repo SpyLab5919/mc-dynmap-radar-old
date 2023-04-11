@@ -1,15 +1,20 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import openDb from './db.js';
+console. log("in bot");
 import {Telegraf} from 'telegraf';
 import {chromium} from 'playwright';
 
+console. log("import telegraf");
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
+console. log("new Telegraf");
 
 const db = await openDb('./db/whitelist.json');
 let whitelist = db.data;
 
-bot.launch();
+await bot.launch().catch((err) => console.error(err));
+console. log("bot.launch");
 
 bot.use(async (ctx, next) => {
   //if (ctx.update.from === undefined) return; // 
