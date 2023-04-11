@@ -93,12 +93,12 @@ bot.command('goko_4orta', (ctx) => {
 bot.command('screenshot', async (ctx) => {
   await bot.telegram.sendChatAction(ctx.chat.id, 'typing');
 
-  const url = "http://borukva.space:3405/?worldname=Borukva&mapname=flat&zoom=3&x=450&y=64&z=-950";
+  const url = "http://borukva.space:3405/?worldname=Borukva&mapname=flat&zoom=2&x=450&y=64&z=-950";
   const delay = 1_000 * ctx.update.message.text.split(' ')[1] || 3_000;
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  await page.setViewportSize({ width: 2400, height: 1400 });
+  await page.setViewportSize({ width: 1200, height: 700 });
 
   try {
   await page.goto(url);
@@ -115,7 +115,7 @@ bot.command('screenshot', async (ctx) => {
   });
 
   const screenshot = await page.screenshot({
-    clip: {x: 500, y: 0, width: 1400, height: 1400}
+    clip: {x: 250, y: 0, width: 700, height: 700}
   });
 
   await browser.close();
