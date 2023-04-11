@@ -98,7 +98,7 @@ bot.command('screenshot', async (ctx) => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  await page.setViewportSize({ width: 1200, height: 700 });
+  await page.setViewportSize({ width: 1400, height: 700 });
 
   try {
   await page.goto(url);
@@ -109,10 +109,7 @@ bot.command('screenshot', async (ctx) => {
     return;
   };
 
-  await new Promise(resolve => setTimeout(resolve, delay))
-  .catch((err) => {
-    console.log(err);
-  });
+  await new Promise(resolve => setTimeout(resolve, delay));
 
   const screenshot = await page.screenshot({
     clip: {x: 250, y: 0, width: 700, height: 700}
