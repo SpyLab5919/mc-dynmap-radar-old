@@ -15,12 +15,12 @@
     "dotenv": "^16.0.1",
     "geometric": "^2.4.0",
     "lowdb": "^3.0.0",
+    "nodemon": "^2.0.22",
     "prettier": "^2.7.1",
     "puppeteer": "^19.8.5",
     "telegraf": "^4.8.6"
   },
   "main": "app.js",
-  "devDependencies": {},
   "description": "Fork of https://github.com/danyloshamaiev/mc-dynmap-scout",
   "repository": {
     "type": "git",
