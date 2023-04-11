@@ -9,7 +9,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const db = await openDb('./db/whitelist.json');
 let whitelist = db.data;
 
-bot.launch(() => console.log(`Бот запустився`));
+bot.launch();
 
 bot.use(async (ctx, next) => {
   //if (ctx.update.from === undefined) return; // 
