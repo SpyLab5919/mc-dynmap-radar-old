@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node --unhandled-rejections=strict app.js",
+    "deploy": "npx playwright install && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
