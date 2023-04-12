@@ -40,6 +40,9 @@ bot.use(async (ctx, next) => {
   const chatId = ctx.update.message?.chat.id;
   const update = ctx.update.message || ctx.update.callback_query;
 // userId == process.env.RIGHTFUL_USER_ID || 
+
+
+try {
   if (chatId == process.env.MAIN_CHAT_ID) {
     console.log(`[${new Date().toISOString()}] ${ctx.update.message?.from.username} ${userId} використав ${ctx.update.message?.text}`);
     await next();
@@ -52,6 +55,10 @@ bot.use(async (ctx, next) => {
     return;
   }
   await ctx.reply('У вас немає прав.');
+} catch (err) {
+    console.error(err);
+    bot.reply(`Виникла помилка при виконанні програми`);
+}
 
 });
 
@@ -111,17 +118,17 @@ bot.command('removeplayer', (ctx) => {
   db.write();
 });
 
-bot.command('sex', (ctx) => {
+bot.command('sex', async (ctx) => {
   console.log(`Секс!`);
-  ctx.reply(`Секс!`);
+  await ctx.reply(`Секс!`);
 });
-bot.command('goko_4orta', (ctx) => {
+bot.command('goko_4orta', async (ctx) => {
   console.log(`/goko_4orta`);
-  ctx.reply(`/goko_4orta`);
+  await ctx.reply(`/goko_4orta`);
 });
-bot.command('/plotnaya_vsim_nashim', (ctx) => {
+bot.command('/plotnaya_vsim_nashim', async (ctx) => {
   console.log(`o/`);
-  ctx.reply(`o/`);
+  await ctx.reply(`o/`);
 })
 
 
@@ -133,6 +140,7 @@ bot.command('screenshot', async (ctx) => {
   }).catch((err) => {
     console.error(err);
     bot.reply(`Виникла помилка при скріншоті`);
+    return;
   });
 
   //await browser.close();
