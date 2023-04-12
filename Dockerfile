@@ -23,4 +23,4 @@ USER node
 COPY --chown=node:node . /app
 
 # Run Node index.js file
-CMD [ "dumb-init", "node", "app.js" ]
+CMD [ "node", "app.js" ]
