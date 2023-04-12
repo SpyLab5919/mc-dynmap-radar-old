@@ -17,10 +17,10 @@ COPY db/ /app/db/
 # Install Deps
 RUN npm ci --only=production
 
-ENV NODE_ENV production
+# ENV NODE_ENV production
 
-USER node
-COPY --chown=node:node . /app
+# USER node
+# COPY --chown=node:node . /app
 
 # Run Node index.js file
 CMD [ "node", "app.js" ]
