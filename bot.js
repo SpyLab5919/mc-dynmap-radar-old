@@ -16,6 +16,21 @@ console. log("new Telegraf");
 const db = await openDb('./db/whitelist.json');
 let whitelist = db.data;
 
+const url = "http://borukva.space:3405/?worldname=Borukva&mapname=flat&zoom=2&x=450&y=64&z=-950";
+const browser = await chromium.launch();
+const page = await browser.newPage();
+
+await page.setViewportSize({ width: 1200, height: 700 });
+
+try {
+  await page.goto(url);
+} catch(err) {
+  console.log(`[${new Date().toISOString()}] Помилка підключення до динмапи`);
+  console.log(err);
+  ctx.reply(`Помилка підключення до динмапи`);
+};
+
+
 await bot.launch().catch((err) => console.error(err));
 console. log("bot.launch");
 
@@ -93,29 +108,14 @@ bot.command('goko_4orta', (ctx) => {
 bot.command('screenshot', async (ctx) => {
   await bot.telegram.sendChatAction(ctx.chat.id, 'typing');
 
-  const url = "http://borukva.space:3405/?worldname=Borukva&mapname=flat&zoom=2&x=450&y=64&z=-950";
-  const delay = 1_000 * ctx.update.message.text.split(' ')[1] || 3_000;
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-
-  await page.setViewportSize({ width: 1200, height: 700 });
-
-  try {
-  await page.goto(url);
-  } catch(err) {
-    console.log(`[${new Date().toISOString()}] Помилка підключення до динмапи`);
-    console.log(err);
-    ctx.reply(`Помилка підключення до динмапи`);
-    return;
-  };
-
-  await new Promise(resolve => setTimeout(resolve, delay));
-
   const screenshot = await page.screenshot({
     clip: {x: 250, y: 0, width: 700, height: 700}
+  }).catch((err) => {
+    console.error(err);
+    bot.reply(`Виникла помилка при скріншоті`);
   });
 
-  await browser.close();
+  //await browser.close();
 
   await bot.telegram.sendPhoto(ctx.chat.id, { source: screenshot });
   console.log(`[${new Date().toISOString()}] Скріншот мапи`);
