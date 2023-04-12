@@ -18,7 +18,5 @@ COPY db/ /app/db/
 # Install Deps
 RUN npm install
 
-# Build TS into JS to run via Node
-RUN npm run start
-
 # Run Node index.js file
+CMD [ "npm", "start" ]
