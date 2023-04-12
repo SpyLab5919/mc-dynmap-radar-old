@@ -41,17 +41,17 @@ bot.use(async (ctx, next) => {
   const update = ctx.update.message || ctx.update.callback_query;
 // userId == process.env.RIGHTFUL_USER_ID || 
   if (chatId == process.env.MAIN_CHAT_ID) {
-    next();
+    console.log(`[${new Date().toISOString()}] ${ctx.update.message?.from.username} ${userId} використав ${ctx.update.message?.text}`);
+    await next();
     return;
   }
   
-  // await ctx.reply('У вас немає прав.');
-  if (userId != process.env.RIGHTFUL_USER_ID && chatId != process.env.MAIN_CHAT_ID) {
-    next();
-    console.log(`[${new Date().toISOString()}] Використання команди ${ctx.update.message?.text} користувачем ${ctx.update.message?.from.username} ${userId} у ${ctx.update.message?.chat.username} ${chatId}`);
+  if (userId != process.env.RIGHTFUL_USER_ID || chatId != process.env.MAIN_CHAT_ID) {
+    await next();
+    console.log(`[${new Date().toISOString()}] ${ctx.update.message?.from.username} ${userId} використав ${ctx.update.message?.text} у ${ctx.update.message?.chat.username} ${chatId}`);
     return;
   }
-  next();
+  await ctx.reply('У вас немає прав.');
 
 });
 
@@ -60,20 +60,29 @@ bot.command('seewhitelist', (ctx) => {
   ctx.reply(whitelist.join(' \n'));
 });
 
-bot.command('addadmin', (ctx) => {
-  const user = ctx.update.message.from.username;
-  const playerName = ctx.update.message.text.split(' ')[1];
+// bot.command('addadmin', (ctx) => {
+//   const user = ctx.update.message.from.username;
+//   const playerName = ctx.update.message.text.split(' ')[1];
+//   if (playerName === undefined) {
+//     ctx.reply(`Введіть нік гравця`);
+//     return;
+//   }
 
-  console.log(`[${new Date().toISOString()}] ${user} додав ${playerName} до вайтлісту.`);
-  ctx.reply(`Додаю ${playerName} до вайтлісту.`);
-  whitelist.push(playerName);
-  db.write();
-});
+//   console.log(`[${new Date().toISOString()}] ${user} додав ${playerName} до вайтлісту.`);
+//   ctx.reply(`Додаю ${playerName} до вайтлісту.`);
+//   whitelist.push(playerName);
+//   db.write();
+// });
 
 bot.command('addplayer', (ctx) => {
-  const user = ctx.update.message.from.username;
   const playerName = ctx.update.message.text.split(' ')[1];
-
+  
+  if (playerName === undefined) {
+    ctx.reply(`Введіть нік гравця`);
+    return;
+  }
+  const user = ctx.update.message.from.username;
+  
   console.log(`[${new Date().toISOString()}] ${user} додав ${playerName} до вайтлісту.`);
   ctx.reply(`Додаю ${playerName} до вайтлісту.`);
   whitelist.push(playerName);
@@ -81,8 +90,14 @@ bot.command('addplayer', (ctx) => {
 });
 
 bot.command('removeplayer', (ctx) => {
-  const user = ctx.update.message.from.username;
   const playerName = ctx.update.message.text.split(' ')[1];
+  
+  if (playerName === undefined) {
+    ctx.reply(`Введіть нік гравця`);
+    return;
+  }
+  
+  const user = ctx.update.message.from.username;
   const playerIndex = whitelist.indexOf(playerName);
 
   if (playerIndex !== -1) {
@@ -104,6 +119,11 @@ bot.command('goko_4orta', (ctx) => {
   console.log(`/goko_4orta`);
   ctx.reply(`/goko_4orta`);
 });
+bot.command('/plotnaya_vsim_nashim', (ctx) => {
+  console.log(`o/`);
+  ctx.reply(`o/`);
+})
+
 
 bot.command('screenshot', async (ctx) => {
   await bot.telegram.sendChatAction(ctx.chat.id, 'typing');
