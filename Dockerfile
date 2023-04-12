@@ -1,5 +1,5 @@
 # Build Environment: Node + Playwright
-FROM node:18
+FROM node:18.15.0-buster
 FROM mcr.microsoft.com/playwright:focal
 
 # Env
@@ -15,7 +15,12 @@ COPY *.js /app/
 COPY db/ /app/db/
 
 # Install Deps
-RUN npm install
+RUN npm ci --only=production
+
+ENV NODE_ENV production
+
+USER node
+COPY --chown=node:node . /app
 
 # Run Node index.js file
-CMD [ "npm", "start" ]
+CMD [ "dumb-init" "node", "app.js" ]
