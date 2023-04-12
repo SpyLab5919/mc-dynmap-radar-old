@@ -12,7 +12,6 @@ EXPOSE 3000
 # Copy all app files into Docker Work directory
 COPY package*.json /app/
 COPY *.js /app/
-COPY .env /app/
 COPY db/ /app/db/
 
 # Install Deps
