@@ -23,4 +23,4 @@ RUN npm ci --only=production
 # COPY --chown=node:node . /app
 
 # Run Node index.js file
-CMD [ "node", "app.js" ]
+CMD [ "node", "/app/app.js" ]
