@@ -149,6 +149,11 @@ bot.command('screenshot', async (ctx) => {
   console.log(`[${new Date().toISOString()}] Скріншот мапи`);
 });
 
+bot.command('terminate', async (ctx) => {
+	await ctx.reply(`Вимикаюсь..,`);
+	bot.stop('SIGNINT');
+})
+
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
