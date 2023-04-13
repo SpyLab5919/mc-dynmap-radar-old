@@ -145,6 +145,7 @@ bot.command('screenshot', async (ctx) => {
 bot.command('terminate', async (ctx) => {
 	await ctx.reply(`Вимикаюсь..,`);
 	bot.stop('SIGNINT');
+  process.exit(10);
 })
 
 
