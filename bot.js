@@ -149,4 +149,7 @@ bot.command('screenshot', async (ctx) => {
   console.log(`[${new Date().toISOString()}] Скріншот мапи`);
 });
 
+
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
 export default bot;
