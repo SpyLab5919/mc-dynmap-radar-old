@@ -1,17 +1,10 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import openDb from './db.js';
-console. log("in bot");
 import {Telegraf} from 'telegraf';
 import {chromium} from 'playwright';
 
-console. log("import telegraf");
-
 const bot = new Telegraf(process.env.BOT_TOKEN);
-console. log(process.env.BOT_TOKEN);
-console. log(process.env.DYNMAP_URL);
-
-console. log("new Telegraf");
 
 const db = await openDb('./db/whitelist.json');
 let whitelist = db.data;

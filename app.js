@@ -140,6 +140,7 @@ let intrudersInBorders = [];
 setInterval(() => scanMap(), 10_000);
 
 function scanMap() {
+  console.log(`Сканую`);
   axios
     .get(`${process.env.DYNMAP_URL}/${Date.now()}`)
     .then((res) => {
@@ -173,6 +174,7 @@ function scanMap() {
     .catch((err) => {
       console.log(err);
     });
+    console.log(`завершив сканування`);
 }
 
 async function alert(intruder) {
