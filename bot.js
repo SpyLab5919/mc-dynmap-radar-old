@@ -34,12 +34,12 @@ bot.use(async (ctx, next) => {
   const update = ctx.update.message || ctx.update.callback_query;
   // userId == process.env.RIGHTFUL_USER_ID || 
 
-  if (ctx.update.message?.text == '/terminate') {
-    await ctx.reply(`Вимикаюсь...`);
+  // if (ctx.update.message?.text == '/terminate') {
+  //   await ctx.reply(`Вимикаюсь...`);
 
-    bot.stop('SIGNINT');
-    process.exit();
-  }
+  //   bot.stop('SIGNINT');
+  //   process.exit();
+  // }
   try {
     if (chatId == process.env.MAIN_CHAT_ID) {
       console.log(`[${new Date().toISOString()}] ${ctx.update.message?.from.username} ${userId} використав ${ctx.update.message?.text}`);
