@@ -1,0 +1,12 @@
+{
+  "defaultDelay": "5_000",
+  "defaultZoom": 3,
+  "screenWidth": 2400,
+  "screenHeight": 1400,
+  "imageWidth": 1400,
+  "imageHeight": 1400,
+  "imagePaddingX": 500,
+  "imagePaddingY": 0,
+  "worldname": "Borukva",
+  "mapname": "flat"
+}

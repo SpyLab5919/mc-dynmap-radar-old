@@ -6,21 +6,18 @@ FROM mcr.microsoft.com/playwright:focal
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-# Export port 3000 for Node
-EXPOSE 3000
 
 # Copy all app files into Docker Work directory
 COPY package*.json /app/
-COPY *.js /app/
-COPY db/ /app/db/
+COPY src/ /app/src/
 
 # Install Deps
 RUN npm ci --only=production
 
-# ENV NODE_ENV production
-
-# USER node
-# COPY --chown=node:node . /app
+ENV NODE_ENV production
 
 # Run Node index.js file
-CMD [ "node", "/app/app.js" ]
+CMD [ "node", "/app/src/app.js" ]
+
+# Export port 3000 for Node
+EXPOSE 3000
